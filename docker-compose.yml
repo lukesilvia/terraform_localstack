@@ -1,0 +1,16 @@
+version: '3.7'
+services:
+  terraform:
+    image: hashicorp/terraform:light
+    volumes:
+      - ./:/app
+    working_dir: /app
+  localstack:
+    image: localstack/localstack:0.9.6
+    ports:
+      - "8080:8080"
+      - "4572:4572"
+    environment:
+      - SERVICES=s3
+    volumes:
+      - "./localstack-data:/tmp/localstack"
